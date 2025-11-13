@@ -1,100 +1,148 @@
-# Portfolio CMS - Strapi Setup
+# 🎯 Quick Start Guide
 
-This directory contains the Strapi CMS configuration for the portfolio site.
+## Start Strapi (Choose One Method)
 
-## Requirements
+### Method 1: Use the Helper Script (Easiest)
 
-- Node.js 18.x or 20.x (Strapi v4 is not compatible with Node.js 22+)
-- npm >= 6.0.0
-
-## Installation
-
-### Option 1: Use Production CMS
-
-The portfolio is already configured to use the production Strapi CMS at:
-**https://intuitive-idea-4fd32251fd.strapiapp.com**
-
-Update the Next.js `.env.local` file:
-```env
-NEXT_PUBLIC_STRAPI_URL=https://intuitive-idea-4fd32251fd.strapiapp.com
-```
-
-### Option 2: Local Development
-
-1. **Switch to Node.js 18 or 20:**
-```bash
-nvm use 20  # or nvm install 20
-```
-
-2. **Install Strapi:**
 ```bash
 cd my-site-cms
-npx create-strapi-app@latest . --quickstart
+./start.sh
 ```
 
-3. **Create Content Types:**
+### Method 2: Direct Command
 
-#### Experience Content Type
-
-Create a new content type called `experience` with the following fields:
-
-- `company` - Text (Short text)
-- `role` - Text (Short text)
-- `description` - Text (Long text)
-- `startDate` - Date
-- `endDate` - Date (optional)
-- `current` - Boolean
-- `website` - Text (Short text)
-- `technologies` - JSON
-- `location` - Text (Short text, optional)
-
-#### Project Content Type
-
-Create a new content type called `project` with the following fields:
-
-- `title` - Text (Short text)
-- `description` - Text (Long text)
-- `image` - Media (Single file, optional)
-- `url` - Text (Short text)
-- `featured` - Boolean
-- `technologies` - JSON
-- `category` - Text (Short text, optional)
-
-#### Contact Message Content Type
-
-Create a new content type called `contact-message` with the following fields:
-
-- `name` - Text (Short text)
-- `email` - Email
-- `subject` - Text (Short text)
-- `message` - Text (Long text)
-
-4. **Configure Permissions:**
-
-Go to Settings > Roles > Public and enable:
-- `find` and `findOne` for `experience` and `project`
-- `create` for `contact-message`
-
-5. **Add Sample Data:**
-
-Use the Strapi admin panel to add your experience and project data.
-
-6. **Start Development Server:**
 ```bash
+cd my-site-cms
+source ~/.nvm/nvm.sh && nvm use 20 && npm run develop
+```
+
+### Method 3: Manual Steps
+
+```bash
+cd my-site-cms
+nvm use 20
 npm run develop
 ```
 
-The CMS will be available at `http://localhost:1337`
+---
 
-## API Endpoints
+## 🌐 Access Points
 
-Once Strapi is running, the following endpoints will be available:
+- **Admin Panel**: http://localhost:1337/admin
+- **API Base**: http://localhost:1337/api
 
-- GET `/api/experiences` - List all experiences
-- GET `/api/projects` - List all projects  
-- POST `/api/contact-messages` - Submit contact form
+---
 
-## Note
+## 🆕 First Time Setup
 
-The Next.js site includes fallback data, so it will work even if Strapi is not available. This is useful for development and ensures the site is always functional.
+When you start Strapi for the first time:
 
+1. Browser will open automatically to http://localhost:1337/admin
+2. **Create admin account**:
+
+   - First name: `Johnson`
+   - Last name: `Mwakazi`
+   - Email: Your email
+   - Password: Create a secure password
+
+3. **You'll see the Strapi Dashboard**
+
+---
+
+## 📝 Create Content Types
+
+Follow these guides in order:
+
+1. **STRAPI_SETUP_GUIDE.md** - Step-by-step content type creation
+2. **LOCAL_SETUP.md** - Complete local development guide
+
+### Quick Steps:
+
+1. Click **"Content-Type Builder"** (left sidebar)
+2. Create 3 collection types:
+   - **Experience** (work history)
+   - **Project** (portfolio items)
+   - **Contact Message** (form submissions)
+3. Follow the field definitions in `STRAPI_SETUP_GUIDE.md`
+
+---
+
+## ⚠️ Important: Node.js Version
+
+**Always use Node.js 20** with Strapi:
+
+```bash
+# Check current version
+node --version
+
+# If not v20.x.x, switch:
+nvm use 20
+```
+
+The `.nvmrc` file will help auto-switch when you `cd` into this directory.
+
+---
+
+## 🐛 Troubleshooting
+
+### "Module version mismatch" Error
+
+```bash
+cd my-site-cms
+nvm use 20
+npm rebuild better-sqlite3
+npm run develop
+```
+
+### "Port 1337 already in use"
+
+```bash
+# Kill existing Strapi process
+pkill -f "strapi develop"
+
+# Or use a different port
+PORT=1338 npm run develop
+```
+
+### "Can't create content types"
+
+- Make sure you're running in **development mode** (not production)
+- Check you're using `npm run develop` (not `npm start`)
+
+---
+
+## 📚 Documentation
+
+- `STRAPI_SETUP_GUIDE.md` - Content type creation guide
+- `LOCAL_SETUP.md` - Complete setup documentation
+- `ENV_SETUP.md` - Environment configuration
+- `schema-templates/` - Reference schemas for content types
+
+---
+
+## 🔄 Connect Frontend to Local Strapi
+
+In `my-site/.env.local`:
+
+```env
+NEXT_PUBLIC_STRAPI_URL=http://localhost:1337
+```
+
+Then restart your Next.js dev server:
+
+```bash
+cd my-site
+npm run dev
+```
+
+---
+
+## ✅ Verify Everything Works
+
+1. **Admin Panel**: http://localhost:1337/admin ✓
+2. **API**: http://localhost:1337/api/experiences
+3. **Frontend**: http://localhost:3000
+
+---
+
+**Need help?** Check `TROUBLESHOOTING.md` or the other guide files!

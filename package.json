@@ -1,18 +1,23 @@
 {
   "name": "my-site-cms",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "description": "A Strapi application for Johnson Mwakazi Portfolio",
+  "license": "MIT",
+  "author": {
+    "name": "Johnson Mwakazi"
+  },
   "scripts": {
-    "develop": "strapi develop",
-    "start": "strapi start",
     "build": "strapi build",
+    "develop": "strapi develop",
+    "seed": "node seed-data.js",
+    "start": "strapi start",
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/strapi": "4.25.9",
-    "@strapi/plugin-users-permissions": "4.25.9",
     "@strapi/plugin-i18n": "4.25.9",
+    "@strapi/plugin-users-permissions": "4.25.9",
+    "@strapi/strapi": "4.25.9",
     "better-sqlite3": "9.4.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -23,15 +28,11 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0"
   },
-  "author": {
-    "name": "Johnson Mwakazi"
-  },
-  "strapi": {
-    "uuid": "portfolio-cms"
-  },
   "engines": {
     "node": ">=18.0.0 <=20.x.x",
     "npm": ">=6.0.0"
   },
-  "license": "MIT"
+  "strapi": {
+    "uuid": "portfolio-cms"
+  }
 }
